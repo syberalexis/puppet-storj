@@ -1,0 +1,29 @@
+# THIS FILE IS MANAGED BY PUPPET
+[Unit]
+Description=Storj storagenode service
+BindsTo=docker.service
+After=docker.service
+
+[Service]
+User=<%= @user %>
+Group=<%= @group %>
+Environment=NAME=storagenode
+Restart=on-failure
+RestartSec=10
+ExecStartPre=-/usr/bin/docker kill ${NAME}
+ExecStartPre=-/usr/bin/docker rm ${NAME}
+ExecStart=/usr/bin/docker run --name ${NAME} \
+--stop-timeout 300 \
+-p <%= @port %>:28967 \
+-p <%= @dashboard_port %>:14002 \
+-e WALLET="<%= @wallet %>" \
+-e EMAIL="<%= @mail %>" \
+-e ADDRESS="<%= @host %>" \
+-e STORAGE="<%= @storage %>" \
+--mount type=bind,source="<%= @identity_dir %>/storagenode",destination=/app/identity \
+--mount type=bind,source="<%= @storage_path %>",destination=/app/config \
+storjlabs/storagenode:<%= @docker_tag %>
+ExecStop=/usr/bin/docker stop ${NAME}
+
+[Install]
+WantedBy=multi-user.target
