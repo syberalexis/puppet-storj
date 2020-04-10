@@ -73,7 +73,7 @@ class storj (
   # Installation
   Stdlib::Absolutepath                             $base_dir           = '/opt',
   Stdlib::Absolutepath                             $bin_dir            = '/usr/local/bin',
-  Stdlib::HTTPUrl                                  $base_url           = 'https://github.com/storj/storj/releases',
+  Stdlib::HTTPUrl                                  $base_url           = 'https://github.com/storj/storj/releases/download',
   String                                           $download_extension = 'zip',
   Optional[Stdlib::HTTPUrl]                        $download_url       = undef,
   Optional[String]                                 $extract_command    = undef,
@@ -123,6 +123,6 @@ class storj (
   if $manage_docker {
     include docker
 
-    Class['docker'] -> Class['storj::service']
+    Class['docker'] -> Class['storj::install']
   }
 }
