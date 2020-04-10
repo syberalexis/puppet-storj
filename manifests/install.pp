@@ -51,6 +51,8 @@ class storj::install (
   Stdlib::Absolutepath     $usershell          = $storj::usershell,
   Array[String]            $extra_groups       = $storj::extra_groups,
 ) {
+  ensure_packages('unzip', { ensure => 'present' })
+
   archive { "/tmp/identity_${version}.${download_extension}":
     ensure          => 'present',
     extract         => true,

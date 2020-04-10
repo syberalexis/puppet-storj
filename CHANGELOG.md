@@ -8,7 +8,6 @@ All notable changes to this project will be documented in this file.
 
 - Fix Docker installation order
 
-
 ## Release 0.1.0
 
 **Features**
