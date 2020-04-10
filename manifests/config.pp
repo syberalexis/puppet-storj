@@ -4,8 +4,8 @@
 #  Received personal single-use authorization token. See https://documentation.storj.io/before-you-begin/auth-token
 # @param bin_dir
 #  Directory where binaries are located.
-# @param identity_dir
-#  Storj identity node directory. See https://documentation.storj.io/dependencies/identity
+# @param config_dir
+#  Directory where configuration are located.
 # @param user
 #  User running storj.
 # @param group
@@ -15,21 +15,21 @@
 class storj::config (
   Storj::Authorization_token $authorization_token = $storj::authorization_token,
   Stdlib::Absolutepath       $bin_dir             = $storj::bin_dir,
-  Stdlib::Absolutepath       $identity_dir        = $storj::identity_dir,
+  Stdlib::Absolutepath       $config_dir          = $storj::config_dir,
   String                     $user                = $storj::user,
   String                     $group               = $storj::group,
 ) {
   exec { 'Request authorization command':
-    command   => "${bin_dir}/idetntity authorize storagenode ${authorization_token} --identity-dir ${identity_dir}",
-    creates   => "${identity_dir}/storagenode/identity.cert",
+    command   => "${bin_dir}/identity authorize storagenode ${authorization_token} --identity-dir ${config_dir} --config-dir ${config_dir}",
+    onlyif    => "/usr/bin/test `grep -c BEGIN ${config_dir}/storagenode/identity.cert` != 3",
     user      => $group,
     group     => $user,
     logoutput => true,
     notify    => Service['storagenode'],
   }
   -> exec { 'Check certs integrity command':
-    command   => "/usr/bin/test `grep -c BEGIN ${identity_dir}/storagenode/ca.cert` == 2 &&
-                  /usr/bin/test `grep -c BEGIN ${identity_dir}/storagenode/identity.cert` == 3",
+    command   => "/usr/bin/test `grep -c BEGIN ${config_dir}/storagenode/ca.cert` == 2 &&
+                  /usr/bin/test `grep -c BEGIN ${config_dir}/storagenode/identity.cert` == 3",
     logoutput => true,
     returns   => 0,
   }

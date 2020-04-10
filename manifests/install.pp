@@ -16,6 +16,8 @@
 #  Complete URL corresponding to the Storj release, default to undef.
 # @param extract_command
 #  Custom command passed to the archive resource to extract the downloaded archive.
+# @param config_dir
+#  Directory where configuration are located.
 # @param manage_user
 #  Whether to create user for storj or rely on external code for that.
 # @param manage_group
@@ -24,8 +26,6 @@
 #  User running storj.
 # @param group
 #  Group under which storj is running.
-# @param home
-#  User's home running storj.
 # @param usershell
 #  if requested, we create a user for storj. The default shell is false. It can be overwritten to any valid path.
 # @param extra_groups
@@ -41,13 +41,13 @@ class storj::install (
   String                   $download_extension = $storj::download_extension,
   Stdlib::HTTPUrl          $download_url       = $storj::real_download_url,
   Optional[String]         $extract_command    = $storj::extract_command,
+  Stdlib::Absolutepath     $config_dir         = $storj::config_dir,
 
   # User Management
   Boolean                  $manage_user        = $storj::manage_user,
   Boolean                  $manage_group       = $storj::manage_group,
   String                   $user               = $storj::user,
   String                   $group              = $storj::group,
-  String                   $home               = $storj::home,
   Stdlib::Absolutepath     $usershell          = $storj::usershell,
   Array[String]            $extra_groups       = $storj::extra_groups,
 ) {
@@ -84,27 +84,26 @@ class storj::install (
     ensure_resource('user', [ $user ], {
       ensure => 'present',
       system => true,
-      home   => $home,
       groups => concat([$group, 'docker'], $extra_groups),
       shell  => $usershell,
     })
 
-    file { $home:
-      ensure => 'directory',
-      owner  => $user,
-      group  => $group,
-    }
-
-    User[$user] -> File[$home]
+    User[$user] -> File[$config_dir]
 
     if $manage_group {
       Group[$group] -> User[$user]
     }
   }
   if $manage_group {
-    ensure_resource('group', [ $group ],{
+    ensure_resource('group', [ $group ], {
       ensure => 'present',
       system => true,
     })
+  }
+
+  file { $config_dir:
+    ensure => 'directory',
+    owner  => $user,
+    group  => $group,
   }
 }

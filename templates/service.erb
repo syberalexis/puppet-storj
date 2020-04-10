@@ -18,9 +18,9 @@ ExecStart=/usr/bin/docker run --name ${NAME} \
 -p <%= @dashboard_port %>:14002 \
 -e WALLET="<%= @wallet %>" \
 -e EMAIL="<%= @mail %>" \
--e ADDRESS="<%= @host %>" \
+-e ADDRESS="<%= @host %>:<%= @port %>" \
 -e STORAGE="<%= @storage %>" \
---mount type=bind,source="<%= @identity_dir %>/storagenode",destination=/app/identity \
+--mount type=bind,source="<%= @config_dir %>/storagenode",destination=/app/identity \
 --mount type=bind,source="<%= @storage_path %>",destination=/app/config \
 storjlabs/storagenode:<%= @docker_tag %>
 ExecStop=/usr/bin/docker stop ${NAME}

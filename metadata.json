@@ -1,6 +1,6 @@
 {
   "name": "maeq-storj",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "author": "maeq",
   "summary": "This module install and configure Storj storagenode",
   "license": "Apache-2.0",
