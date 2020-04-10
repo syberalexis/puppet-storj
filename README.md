@@ -1,7 +1,6 @@
 # maeq-storj
 
 [![Build Status Travis](https://img.shields.io/travis/com/syberalexis/puppet-storj/master?label=build%20travis)](https://travis-ci.com/syberalexis/puppet-storj)
-[![Build Status AppVeyor](https://img.shields.io/appveyor/ci/syberalexis/puppet-storj/master?label=build%20appveyor)](https://ci.appveyor.com/project/syberalexis/puppet-storj)
 [![Puppet Forge](https://img.shields.io/puppetforge/v/maeq/storj.svg)](https://forge.puppetlabs.com/maeq/storj)
 [![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/maeq/storj.svg)](https://forge.puppetlabs.com/maeq/storj)
 [![Puppet Forge - scores](https://img.shields.io/puppetforge/f/maeq/storj.svg)](https://forge.puppetlabs.com/maeq/storj)
