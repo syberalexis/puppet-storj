@@ -18,7 +18,7 @@
 #  Your node hostname / DNS altname (required to be accessible). See https://documentation.storj.io/dependencies/port-forwarding
 # @param storage
 #  Amount of dedicated storage.
-# @param identity_dir
+# @param config_dir
 #  Storj identity node directory. See https://documentation.storj.io/dependencies/identity
 # @param storage_path
 #  Mounted device location.
@@ -37,7 +37,7 @@ class storj::service (
   String                                           $mail           = $storj::mail,
   Stdlib::Host                                     $host           = $storj::host,
   String                                           $storage        = $storj::storage,
-  Stdlib::Absolutepath                             $identity_dir   = $storj::identity_dir,
+  Stdlib::Absolutepath                             $config_dir   = $storj::config_dir,
   Stdlib::Absolutepath                             $storage_path   = $storj::storage_path,
   String                                           $docker_tag     = $storj::docker_tag,
 ) {

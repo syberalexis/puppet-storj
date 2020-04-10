@@ -30,6 +30,8 @@
 #  Complete URL corresponding to the Storj release, default to undef.
 # @param extract_command
 #  Custom command passed to the archive resource to extract the downloaded archive.
+# @param config_dir
+#  Directory where configuration are located.
 # @param manage_user
 #  Whether to create user for storj or rely on external code for that.
 # @param manage_group
@@ -38,14 +40,10 @@
 #  User running storj.
 # @param group
 #  Group under which storj is running.
-# @param home
-#  User's home running storj.
 # @param usershell
 #  if requested, we create a user for storj. The default shell is false. It can be overwritten to any valid path.
 # @param extra_groups
 #  Add other groups to the managed user.
-# @param identity_dir
-#  Storj identity node directory. See https://documentation.storj.io/dependencies/identity
 # @param service_ensure
 #  State ensured from storagenode service.
 # @param docker_tag
@@ -77,18 +75,15 @@ class storj (
   String                                           $download_extension = 'zip',
   Optional[Stdlib::HTTPUrl]                        $download_url       = undef,
   Optional[String]                                 $extract_command    = undef,
+  Stdlib::Absolutepath                             $config_dir         = "/etc/storj",
 
   # User Management
   Boolean                                          $manage_user        = true,
   Boolean                                          $manage_group       = true,
   String                                           $user               = 'storj',
   String                                           $group              = 'storj',
-  String                                           $home               = '/home/storj',
   Stdlib::Absolutepath                             $usershell          = '/bin/false',
   Array[String]                                    $extra_groups       = [],
-
-  # Configuration
-  Stdlib::Absolutepath                             $identity_dir       = "${home}/.local/share/storj/identity",
 
   # Service
   Variant[Stdlib::Ensure::Service, Enum['absent']] $service_ensure     = 'running',

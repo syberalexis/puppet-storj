@@ -106,7 +106,7 @@ Data type: `Stdlib::HTTPUrl`
 
 Base URL for storj.
 
-Default value: 'https://github.com/storj/storj/releases'
+Default value: 'https://github.com/storj/storj/releases/download'
 
 ##### `download_extension`
 
@@ -131,6 +131,14 @@ Data type: `Optional[String]`
 Custom command passed to the archive resource to extract the downloaded archive.
 
 Default value: `undef`
+
+##### `config_dir`
+
+Data type: `Stdlib::Absolutepath`
+
+Directory where configuration are located.
+
+Default value: "/etc/storj"
 
 ##### `manage_user`
 
@@ -164,14 +172,6 @@ Group under which storj is running.
 
 Default value: 'storj'
 
-##### `home`
-
-Data type: `String`
-
-User's home running storj.
-
-Default value: '/home/storj'
-
 ##### `usershell`
 
 Data type: `Stdlib::Absolutepath`
@@ -187,14 +187,6 @@ Data type: `Array[String]`
 Add other groups to the managed user.
 
 Default value: []
-
-##### `identity_dir`
-
-Data type: `Stdlib::Absolutepath`
-
-Storj identity node directory. See https://documentation.storj.io/dependencies/identity
-
-Default value: "${home}/.local/share/storj/identity"
 
 ##### `service_ensure`
 
@@ -270,13 +262,13 @@ Directory where binaries are located.
 
 Default value: $storj::bin_dir
 
-##### `identity_dir`
+##### `config_dir`
 
 Data type: `Stdlib::Absolutepath`
 
-Storj identity node directory. See https://documentation.storj.io/dependencies/identity
+Directory where configuration are located.
 
-Default value: $storj::identity_dir
+Default value: $storj::config_dir
 
 ##### `user`
 
@@ -374,6 +366,14 @@ Custom command passed to the archive resource to extract the downloaded archive.
 
 Default value: $storj::extract_command
 
+##### `config_dir`
+
+Data type: `Stdlib::Absolutepath`
+
+Directory where configuration are located.
+
+Default value: $storj::config_dir
+
 ##### `manage_user`
 
 Data type: `Boolean`
@@ -405,14 +405,6 @@ Data type: `String`
 Group under which storj is running.
 
 Default value: $storj::group
-
-##### `home`
-
-Data type: `String`
-
-User's home running storj.
-
-Default value: $storj::home
 
 ##### `usershell`
 
@@ -518,13 +510,13 @@ Amount of dedicated storage.
 
 Default value: $storj::storage
 
-##### `identity_dir`
+##### `config_dir`
 
 Data type: `Stdlib::Absolutepath`
 
 Storj identity node directory. See https://documentation.storj.io/dependencies/identity
 
-Default value: $storj::identity_dir
+Default value: $storj::config_dir
 
 ##### `storage_path`
 
