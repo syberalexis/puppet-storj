@@ -138,7 +138,7 @@ Data type: `Stdlib::Absolutepath`
 
 Directory where configuration are located.
 
-Default value: "/etc/storj"
+Default value: '/etc/storj'
 
 ##### `manage_user`
 

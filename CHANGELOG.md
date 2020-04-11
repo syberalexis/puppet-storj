@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.1.4
+
+**Bug fixes**
+
+- Fix warning in linters
+
 ## Release 0.1.3
 
 **Bug fixes**

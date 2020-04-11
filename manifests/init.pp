@@ -75,7 +75,7 @@ class storj (
   String                                           $download_extension = 'zip',
   Optional[Stdlib::HTTPUrl]                        $download_url       = undef,
   Optional[String]                                 $extract_command    = undef,
-  Stdlib::Absolutepath                             $config_dir         = "/etc/storj",
+  Stdlib::Absolutepath                             $config_dir         = '/etc/storj',
 
   # User Management
   Boolean                                          $manage_user        = true,
