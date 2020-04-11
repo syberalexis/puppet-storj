@@ -17,7 +17,7 @@
 
 ## Description
 
-This module automates the install of [Storj](https://storj.io/) and it's components into a service.  
+This module automates the install of [Storj](https://storj.io/) and it's components.  
 
 ## Usage
 
