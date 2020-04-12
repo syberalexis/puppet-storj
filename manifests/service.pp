@@ -37,7 +37,7 @@ class storj::service (
   String                                           $mail           = $storj::mail,
   Stdlib::Host                                     $host           = $storj::host,
   String                                           $storage        = $storj::storage,
-  Stdlib::Absolutepath                             $config_dir   = $storj::config_dir,
+  Stdlib::Absolutepath                             $config_dir     = $storj::config_dir,
   Stdlib::Absolutepath                             $storage_path   = $storj::storage_path,
   String                                           $docker_tag     = $storj::docker_tag,
 ) {

@@ -26,7 +26,7 @@
 #  User running storj.
 # @param group
 #  Group under which storj is running.
-# @param usershell
+# @param user_shell
 #  if requested, we create a user for storj. The default shell is false. It can be overwritten to any valid path.
 # @param extra_groups
 #  Add other groups to the managed user.
@@ -48,7 +48,7 @@ class storj::install (
   Boolean                  $manage_group       = $storj::manage_group,
   String                   $user               = $storj::user,
   String                   $group              = $storj::group,
-  Stdlib::Absolutepath     $usershell          = $storj::usershell,
+  Stdlib::Absolutepath     $user_shell         = $storj::user_shell,
   Array[String]            $extra_groups       = $storj::extra_groups,
 ) {
   ensure_packages('unzip', { ensure => 'present' })
@@ -65,7 +65,10 @@ class storj::install (
   }
   file {
     "${base_dir}/storj-${version}.${os}-${arch}":
-      ensure => 'directory';
+      ensure => 'directory',
+      owner  => 'root',
+      group  => 0, # 0 instead of root because OS X uses "wheel".
+      mode   => '0755';
     "${base_dir}/storj-${version}.${os}-${arch}/identity":
       owner => 'root',
       group => 0, # 0 instead of root because OS X uses "wheel".
@@ -85,7 +88,7 @@ class storj::install (
       ensure => 'present',
       system => true,
       groups => concat([$group, 'docker'], $extra_groups),
-      shell  => $usershell,
+      shell  => $user_shell,
     })
 
     User[$user] -> File[$config_dir]

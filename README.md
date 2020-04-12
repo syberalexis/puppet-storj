@@ -60,7 +60,7 @@ storj::storage: '[THE DEDICATED ANOUT OF STORAGE]'
 storj::storage_path: '[THE DEDICATED STORAGE LOCATION]'
 ```
 
-### Examples
+## Examples
 
 #### Default installation
 

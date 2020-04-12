@@ -172,7 +172,7 @@ Group under which storj is running.
 
 Default value: 'storj'
 
-##### `usershell`
+##### `user_shell`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -406,13 +406,13 @@ Group under which storj is running.
 
 Default value: $storj::group
 
-##### `usershell`
+##### `user_shell`
 
 Data type: `Stdlib::Absolutepath`
 
 if requested, we create a user for storj. The default shell is false. It can be overwritten to any valid path.
 
-Default value: $storj::usershell
+Default value: $storj::user_shell
 
 ##### `extra_groups`
 
