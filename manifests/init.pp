@@ -40,7 +40,7 @@
 #  User running storj.
 # @param group
 #  Group under which storj is running.
-# @param usershell
+# @param user_shell
 #  if requested, we create a user for storj. The default shell is false. It can be overwritten to any valid path.
 # @param extra_groups
 #  Add other groups to the managed user.
@@ -82,7 +82,7 @@ class storj (
   Boolean                                          $manage_group       = true,
   String                                           $user               = 'storj',
   String                                           $group              = 'storj',
-  Stdlib::Absolutepath                             $usershell          = '/bin/false',
+  Stdlib::Absolutepath                             $user_shell         = '/bin/false',
   Array[String]                                    $extra_groups       = [],
 
   # Service
